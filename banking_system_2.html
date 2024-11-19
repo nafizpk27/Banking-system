@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Banking System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .navbar {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        .container {
+            margin: 20px auto;
+            max-width: 800px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #333;
+        }
+        .form-control {
+            margin-bottom: 15px;
+        }
+        .form-control label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        .form-control input, .form-control button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .form-control button {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+        .form-control button:hover {
+            background-color: #45a049;
+        }
+        .transaction-table {
+            margin-top: 20px;
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .transaction-table th, .transaction-table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        .transaction-table th {
+            background-color: #f9f9f9;
+        }
+        .footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h1>Banking Dashboard</h1>
+    </div>
+    <div class="container">
+        <h2>Welcome to Your Banking System</h2>
+
+        <!-- Profile Section -->
+        <div class="form-control">
+            <h3>Update Profile</h3>
+            <label for="username">Name:</label>
+            <input type="text" id="username" placeholder="Enter your name">
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" placeholder="Enter your email">
+
+            <button onclick="updateProfile()">Update Profile</button>
+        </div>
+
+        <!-- Fund Transfer Section -->
+        <div class="form-control">
+            <h3>Fund Transfer</h3>
+            <label for="recipient">Recipient Account:</label>
+            <input type="text" id="recipient" placeholder="Enter recipient account number">
+
+            <label for="amount">Amount:</label>
+            <input type="number" id="amount" placeholder="Enter amount">
+
+            <button onclick="transferFunds()">Transfer</button>
+        </div>
+
+        <!-- Transaction History -->
+        <div class="transaction-history">
+            <h3>Transaction History</h3>
+            <table class="transaction-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Type</th>
+                        <th>Recipient</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody id="history">
+                    <!-- Transactions will be dynamically added here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="footer">
+        <p>© 2024 Banking System. All rights reserved.</p>
+    </div>
+
+    <script>
+        // Profile Update
+        function updateProfile() {
+            const username = document.getElementById("username").value;
+            const email = document.getElementById("email").value;
+
+            if (username && email) {
+                alert("Profile updated successfully!");
+            } else {
+                alert("Please fill all fields!");
+            }
+        }
+
+        // Fund Transfer
+        function transferFunds() {
+            const recipient = document.getElementById("recipient").value;
+            const amount = parseFloat(document.getElementById("amount").value);
+
+            if (recipient && amount > 0) {
+                addTransaction("Transfer", recipient, amount);
+                alert("Fund transferred successfully!");
+            } else {
+                alert("Please enter valid details!");
+            }
+        }
+
+        // Add Transaction to History
+        function addTransaction(type, recipient, amount) {
+            const history = document.getElementById("history");
+            const row = document.createElement("tr");
+            const date = new Date().toLocaleString();
+
+            row.innerHTML = `
+                <td>${date}</td>
+                <td>${type}</td>
+                <td>${recipient}</td>
+                <td>${amount}</td>
+            `;
+            history.appendChild(row);
+        }
+    </script>
+</body>
+</html>
